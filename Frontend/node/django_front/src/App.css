@@ -1,38 +1,50 @@
-.App {
+.container {
+  background-color: rgba(255, 212, 212, 0.805);
+  margin-top: 3vh;
+}
+
+.text {
   text-align: center;
+  font-size: 1em;
+  font-family: serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.title {
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-size: 2em;
+  font-family: serif;
 }
 
-.App-link {
-  color: #61dafb;
+.dis {
+  margin: 10px;
+  font-family: serif;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.link {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 10px;
 }
+
+.dis {
+  background-color: white;
+  border-color: black;
+  border-radius: 3px;
+  border-width: 3px !important;
+}
+
+.comit {
+  text-align: end;
+}
+/*# sourceMappingURL=style.css.map */
