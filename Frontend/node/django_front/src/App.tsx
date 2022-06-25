@@ -66,7 +66,7 @@ export const App = () => {
       <div>
         {datas.map((data: Data) => (
           <div className="dis">
-            {data.name} : {data.price}
+            {data.name}
           </div>
         ))}
       </div>
