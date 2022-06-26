@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
-import "./App.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Home } from './Home';
+import { Link } from "react-router-dom";
 import axios from "axios";
+import "./App.css";
 
 type Data = {
   name: string;
   price: number;
 };
-export const App = () => {
+export const App:React.FC= () => {
   const [name, setName] = useState("");
 
   const urlAPI = "http://localhost:8000/products/products/";
@@ -46,16 +49,11 @@ export const App = () => {
       <p className="text">
         こちらは簡易掲示板のサイトとなります。ログインを行うことで投稿名が自動的に入力されます。登録していない場合はAnonumousUserと表示されます。
       </p>
-      <p>
-        <a href="" className="link">
-          サインアップ
-        </a>
-      </p>
-      <p>
-        <a href="" className="link">
-          ログイン
-        </a>
-      </p>
+      <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Home />} />
+    </Routes>
+  </BrowserRouter>
       <input
         type="text"
         value={name}
@@ -74,4 +72,5 @@ export const App = () => {
     </main>
   );
 };
+
 export default App;

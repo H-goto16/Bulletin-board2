@@ -40,6 +40,12 @@ INSTALLED_APPS = [
     'rest_framework',
     'API',
     'corsheaders',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'rest_auth',
+    'rest_framework.authtoken',
+    'rest_auth.registration',
 ]
 
 MIDDLEWARE = [
@@ -126,3 +132,4 @@ STATIC_URL = '/static/'
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
 ]
+SITE_ID = 1
