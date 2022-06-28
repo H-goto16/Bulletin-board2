@@ -133,3 +133,16 @@ CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
 ]
 SITE_ID = 1
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+            'rest_framework.authentication.TokenAuthentication',
+            'rest_framework.authentication.BasicAuthentication',
+        ),
+        'DEFAULT_PERMISSION_CLASSES': (
+            # https://www.django-rest-framework.org/api-guide/permissions/#setting-the-permission-policy
+            # 'rest_framework.permissions.IsAdminUser',
+            # 'rest_framework.permissions.IsAuthenticated',
+            # 'rest_framework.permissions.AllowAny',
+        ),
+    }

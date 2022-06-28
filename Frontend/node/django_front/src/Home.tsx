@@ -11,13 +11,28 @@ type Data = {
 };
 export const Home:React.FC= () => {
   const [name, setName] = useState("");
+  const [datas, setDatas] = useState([]);
+  const [user, setUser] = useState([]);
 
   const urlAPI = "http://localhost:8000/products/products/";
-  const [datas, setDatas] = useState([]);
+  const urlUser = "http://localhost:8000/rest-auth/user/";
   console.log(axios.defaults.baseURL);
   useEffect(() => {
     axios.get(urlAPI).then((res) => {
       setDatas(res.data);
+    });
+  }, []);
+  console.log(datas);
+
+  console.log(axios.defaults.baseURL);
+  useEffect(() => {
+    axios.get(urlUser, {
+      headers: {
+        Authorization: 'Token 1546b71af7249430ec6bfe69506d144459a21034',
+      }
+    }).then((res) => {
+      console.log(res);
+      setUser(res.data.username);
     });
   }, []);
   console.log(datas);
@@ -50,6 +65,10 @@ export const Home:React.FC= () => {
         こちらは簡易掲示板のサイトとなります。ログインを行うことで投稿名が自動的に入力されます。登録していない場合はAnonumousUserと表示されます。
       </p>
       <p><Link to="/login">ログイン</Link></p>
+      <p><Link to="/Register">新規登録</Link></p>
+        <div className="username">
+          {user}
+        </div>
       <input
         type="text"
         value={name}

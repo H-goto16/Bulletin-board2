@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Home } from "./Home";
 import { Login } from "./login";
-import { Link } from "react-router-dom";
-import axios from "axios";
+import { Register } from "./register";
 import "./App.css";
 
 export const App: React.FC = () => {
@@ -12,6 +10,7 @@ export const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login"element={<Login/>}/>
+        <Route path="/Register"element={<Register/>}/>        
       </Routes>
     </BrowserRouter>
   );
