@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import "./register.css";
+import "../styles/register.css";
 
 export const Register: React.FC = () => {
   const [userName, setName] = useState("");

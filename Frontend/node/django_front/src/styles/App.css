@@ -65,6 +65,7 @@
   background: #c67c68;
   color: #fff;
   font-weight: bold;
+  outline: none;
   padding: 13px 10px 10px;
   border-radius: 5px;
   border-bottom: 5px solid rgba(0,0,0,0.3);
