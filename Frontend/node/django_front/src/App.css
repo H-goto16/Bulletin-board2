@@ -62,7 +62,7 @@
   max-width: 100px;
   width: 100%;
   margin: 10px    ;
-  background: #9b90d6; /* 色変更可能 */
+  background: #c67c68;
   color: #fff;
   font-weight: bold;
   padding: 13px 10px 10px;
@@ -75,11 +75,11 @@
 .button-shadow:active, .button-shadow:focus {
   border-bottom-width: 0;
   margin-top: 5px;
-  background: #9b90d6; /* 色変更可能 */
+  background: #f5be83;
 }
 
 @keyframes flash {
   from { opacity: 0.5; }
   to { opacity: 1; }
 }
-/*# sourceMappingURL=style.css.map */
+

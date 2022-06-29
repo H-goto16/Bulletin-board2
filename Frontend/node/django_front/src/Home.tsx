@@ -2,16 +2,18 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "./App.css";
-import { Cookies } from "react-cookie";
 
 type Data = {
   name: string;
   text: number;
+  time: string;
 };
 export const Home: React.FC = () => {
   const [text, setText] = useState("");
   const [datas, setDatas] = useState([]);
   const [user, setUser] = useState("匿名");
+  const [time, setTime] = useState("");
+
 
   function getCookieArray() {
     const arr: any = new Array();
@@ -35,6 +37,7 @@ export const Home: React.FC = () => {
 
   useEffect(() => {
     axios.get(urlAPI).then(res => {
+      console.log(res)
       setDatas(res.data);
     });
   }, []);
@@ -63,10 +66,33 @@ export const Home: React.FC = () => {
     setText(e.target.value);
   };
   const postData = () => {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const hour = date.getHours();
+    const minute = date.getMinutes();
+    const second = date.getSeconds();
+    const datetime =
+      year +
+      "年" +
+      month +
+      "月" +
+      day +
+      "日" +
+      hour +
+      "時" +
+      minute +
+      "分" +
+      second +
+      "秒";
+    setTime(datetime);
+
     axios
       .post(urlAPI, {
         name: user,
         text: text,
+        time: datetime,
       })
       .then(res => {
         console.log(res);
@@ -85,19 +111,27 @@ export const Home: React.FC = () => {
   };
 
   return (
-
     <main className="container">
+      { time }
       <p className="title">簡易掲示板</p>
       <p className="text">
         こちらは簡易掲示板のサイトとなります。ログインを行うことで、投稿者名をつけて投稿することができます。ログインをしていない場合は匿名になります。
       </p>
       <p>
-        <Link className="reset button-shadow"  to="/login">ログイン</Link>
+        <Link className="reset button-shadow" to="/login">
+          ログイン
+        </Link>
       </p>
-        <Link className="reset button-shadow" to="/Register">新規登録</Link>
-      <p>
-      </p>
-      <input className="reset button-shadow" type="button" value="ログアウト" onClick={logout} />
+      <Link className="reset button-shadow" to="/Register">
+        新規登録
+      </Link>
+      <p></p>
+      <input
+        className="reset button-shadow"
+        type="button"
+        value="ログアウト"
+        onClick={logout}
+      />
       <div className="username">投稿者名：{user}</div>
       <input
         type="text"
@@ -105,11 +139,16 @@ export const Home: React.FC = () => {
         onChange={handleChange}
         className="form-control"
       />
-      <input className="reset button-shadow" type="button" value="送信" onClick={postData} />
+      <input
+        className="reset button-shadow"
+        type="button"
+        value="送信"
+        onClick={postData}
+      />
       <div>
         {datas.map((data: Data) => (
           <div>
-            <div>{data.name}：</div>
+            <div>{data.name}：{data.time}</div>
             <div className="dis">{data.text}</div>
           </div>
         ))}
