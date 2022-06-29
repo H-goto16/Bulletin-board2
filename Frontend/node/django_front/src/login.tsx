@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useCookies } from "react-cookie";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "./App.css";
@@ -7,8 +8,9 @@ export const Login: React.FC = () => {
   const [userName, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [Token, setToken]:any = useState("");
+  const [Token, setToken]:any= useState("");
   const [user, setUser] = useState([]);
+  const [cookies, setCookie, removeCookie] = useCookies();
 
 
   const urlLogin = "http://localhost:8000/rest-auth/login/";
@@ -42,7 +44,16 @@ export const Login: React.FC = () => {
       })
       .then((res) => {
         console.log(res);
-        setToken(res.data.key)
+        setToken(res.data.key);
+        console.log(Token);
+        setCookie("name", Token);
+        axios.get(urlUser, {
+          headers: {
+            Authorization: 'Token ' + Token,
+          }
+        }).then((res) => {
+          console.log(res);
+        });
       })
       .catch((error) => {
         console.log(error);
@@ -50,16 +61,6 @@ export const Login: React.FC = () => {
       .finally(function () {
       });
   };
-
-  axios.get(urlUser, {
-    headers: {
-      Authorization: 'Token ' + Token,
-    }
-  }).then((res) => {
-    console.log(res);
-    setUser(res.data.username);
-    console.log(user)
-  });
 
   return (
     <div>
@@ -85,6 +86,7 @@ export const Login: React.FC = () => {
         className="form-control"
       />
       <input type="button" value="送信" onClick={postData} />
-        </div>
+    </div>
+
   );
 };
