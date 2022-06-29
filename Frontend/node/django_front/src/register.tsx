@@ -8,13 +8,16 @@ export const Register: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password1, setPassword1] = useState("");
   const [password2, setPassword2] = useState("");
+  const [status, setStatus]: any = useState("");
+  const [message, setMassage]: any = useState("");
+  const [svMassage, setSvMassage]: any = useState("");
 
   const urlAPI = "http://localhost:8000/products/products/";
   const urlRegister = "http://localhost:8000/rest-auth/registration/";
   const [datas, setDatas] = useState([]);
   console.log(axios.defaults.baseURL);
   useEffect(() => {
-    axios.get(urlAPI).then((res) => {
+    axios.get(urlAPI).then(res => {
       setDatas(res.data);
     });
   }, []);
@@ -50,40 +53,58 @@ export const Register: React.FC = () => {
         username: userName,
         email: email,
         password1: password1,
-        password2: password2
+        password2: password2,
       })
-      .then((res) => {
+      .then(res => {
         console.log(res);
+        setStatus(res.status);
+        console.log(res.status);
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
+        setStatus(error.response.status);
+        console.log(error.response.status);
+        console.log(error.request.responseText);
+        if (error.response.status === 500) {
+          setMassage("登録に成功しました。");
+        } else {
+          setMassage(
+            "登録に失敗しました。エラーメッセージを確認してください。"
+          );
+        }
+        if (error.response.status !== 500) {
+          setSvMassage(error.request.responseText);
+        }
       })
-      .finally(function () {
-        // window.location.reload();
-      });
   };
 
   return (
     <div>
-      <Link to="/login">ログイン</Link>
+      <p>{message}</p>
+      <p>{svMassage}</p>
+      <p>ユーザー名</p>
       <input
         type="text"
         value={userName}
         onChange={handleChange}
         className="form-control"
       />
+      <p>メールアドレス</p>
       <input
         type="text"
         value={email}
         onChange={handleEmail}
         className="form-control"
       />
+      <p>パスワード</p>
+
       <input
         type="text"
         value={password1}
         onChange={handlePassword1}
         className="form-control"
       />
+      <p>パスワード再入力</p>
       <input
         type="text"
         value={password2}
@@ -91,6 +112,10 @@ export const Register: React.FC = () => {
         className="form-control"
       />
       <input type="button" value="送信" onClick={postData} />
+      <div>
+        <p>登録に成功したら下記のリンクからログインをしてくさい。</p>
+        <Link to="/login">ログイン</Link>
+      </div>
     </div>
   );
 };
