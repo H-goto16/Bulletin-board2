@@ -6,10 +6,10 @@ import { Cookies } from "react-cookie";
 
 type Data = {
   name: string;
-  price: number;
+  text: number;
 };
 export const Home: React.FC = () => {
-  const [name, setName] = useState("");
+  const [text, setText] = useState("");
   const [datas, setDatas] = useState([]);
   const [user, setUser] = useState("匿名");
 
@@ -60,13 +60,13 @@ export const Home: React.FC = () => {
   const handleChange = (e: {
     target: { value: React.SetStateAction<string> };
   }) => {
-    setName(e.target.value);
+    setText(e.target.value);
   };
   const postData = () => {
     axios
       .post(urlAPI, {
-        name: name,
-        price: 1,
+        name: user,
+        text: text,
       })
       .then(res => {
         console.log(res);
@@ -80,35 +80,38 @@ export const Home: React.FC = () => {
   };
 
   const logout = () => {
-    document.cookie = 'name=;expires=0;';
+    document.cookie = "name=;expires=0;";
     window.location.reload();
   };
 
   return (
+
     <main className="container">
       <p className="title">簡易掲示板</p>
       <p className="text">
-        こちらは簡易掲示板のサイトとなります。ログインを行うことで投稿名が自動的に入力されます。登録していない場合はAnonumousUserと表示されます。
+        こちらは簡易掲示板のサイトとなります。ログインを行うことで、投稿者名をつけて投稿することができます。ログインをしていない場合は匿名になります。
       </p>
       <p>
-        <Link to="/login">ログイン</Link>
+        <Link className="reset button-shadow"  to="/login">ログイン</Link>
       </p>
+        <Link className="reset button-shadow" to="/Register">新規登録</Link>
       <p>
-        <Link to="/Register">新規登録</Link>
       </p>
-      <input type="button" value="ログアウト" onClick={logout} />
-
+      <input className="reset button-shadow" type="button" value="ログアウト" onClick={logout} />
       <div className="username">投稿者名：{user}</div>
       <input
         type="text"
-        value={name}
+        value={text}
         onChange={handleChange}
         className="form-control"
       />
-      <input type="button" value="送信" onClick={postData} />
+      <input className="reset button-shadow" type="button" value="送信" onClick={postData} />
       <div>
         {datas.map((data: Data) => (
-          <div className="dis">{data.name}</div>
+          <div>
+            <div>{data.name}：</div>
+            <div className="dis">{data.text}</div>
+          </div>
         ))}
       </div>
       &nbsp;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import "./App.css";
+import "./register.css";
 
 export const Register: React.FC = () => {
   const [userName, setName] = useState("");
@@ -79,24 +79,25 @@ export const Register: React.FC = () => {
   };
 
   return (
-    <div>
-      <p>{message}</p>
-      <p>{svMassage}</p>
-      <p>ユーザー名</p>
+    <div className="container">
+      <h2 className="title">ユーザー新規登録</h2>
+      <p className="text">{message}</p>
+      <p className="text">{svMassage}</p>
+      <p className="input">ユーザー名</p>
       <input
         type="text"
         value={userName}
         onChange={handleChange}
         className="form-control"
       />
-      <p>メールアドレス</p>
+      <p className="input">メールアドレス</p>
       <input
         type="text"
         value={email}
         onChange={handleEmail}
         className="form-control"
       />
-      <p>パスワード</p>
+      <p className="input">パスワード</p>
 
       <input
         type="text"
@@ -104,18 +105,19 @@ export const Register: React.FC = () => {
         onChange={handlePassword1}
         className="form-control"
       />
-      <p>パスワード再入力</p>
+      <p className="input">パスワード再入力</p>
       <input
         type="text"
         value={password2}
         onChange={handlePassword2}
         className="form-control"
       />
-      <input type="button" value="送信" onClick={postData} />
+      <input  className="reset button-shadow" type="button" value="送信" onClick={postData} />
       <div>
-        <p>登録に成功したら下記のリンクからログインをしてくさい。</p>
-        <Link to="/login">ログイン</Link>
+        <p className="text">登録に成功したら下記のリンクからログインをしてくさい。</p>
+        <Link  className="reset button-shadow" to="/login">ログイン</Link>
       </div>
+      &nbsp;
     </div>
   );
 };
