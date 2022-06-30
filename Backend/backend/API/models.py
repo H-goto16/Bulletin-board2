@@ -6,6 +6,5 @@ class Product(models.Model):
     text = models.CharField(max_length=500)
     time = models.CharField(max_length=40)
 
-    
     def __str__(self):
         return self.name

@@ -57,13 +57,10 @@ export const Login: React.FC = () => {
         password: password,
       })
       .then(res => {
-        console.log(res);
         setToken(res.data.key);
         setCookie("name", Token);
         syncDelay(100);
         setStatus(res.status);
-        console.log(res.status);
-        console.log(Token);
         axios
           .get(urlUser, {
             headers: {
@@ -71,16 +68,12 @@ export const Login: React.FC = () => {
             },
           })
           .then(res => {
-            console.log(res.data.username);
             setUser(res.data.username);
-            console.log(user);
           });
       })
       .catch(error => {
-        console.log(error);
       })
       .finally(function () {
-        console.log(status);
         if (status == 200) {
           setMassage("ログインに成功しました。");
         } else if (status == 401) {
@@ -103,7 +96,7 @@ export const Login: React.FC = () => {
       </p>
       <p className="error">{message}</p>
       <p className="text">
-        ユーザー名、パスワードはどちらか片方でログインできます。
+        ユーザー名、メールアドレスはどちらか片方でログインできます。
       </p>
       <p className="input">ユーザー名</p>
       <input

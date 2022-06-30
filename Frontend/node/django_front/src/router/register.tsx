@@ -11,17 +11,16 @@ export const Register: React.FC = () => {
   const [status, setStatus]: any = useState("");
   const [message, setMassage]: any = useState("");
   const [svMassage, setSvMassage]: any = useState("");
+  const [datas, setDatas] = useState([]);
 
   const urlAPI = "http://localhost:8000/products/products/";
   const urlRegister = "http://localhost:8000/rest-auth/registration/";
-  const [datas, setDatas] = useState([]);
-  console.log(axios.defaults.baseURL);
+  
   useEffect(() => {
     axios.get(urlAPI).then(res => {
       setDatas(res.data);
     });
   }, []);
-  console.log(datas);
 
   const handleChange = (e: {
     target: { value: React.SetStateAction<string> };
@@ -56,26 +55,19 @@ export const Register: React.FC = () => {
         password2: password2,
       })
       .then(res => {
-        console.log(res);
         setStatus(res.status);
-        console.log(res.status);
       })
       .catch(error => {
-        console.log(error);
         setStatus(error.response.status);
-        console.log(error.response.status);
-        console.log(error.request.responseText);
         if (error.response.status === 500) {
           setMassage("登録に成功しました。");
         } else {
-          setMassage(
-            "登録に失敗しました。エラーメッセージを確認してください。"
-          );
+          setMassage("登録に失敗しました。エラーメッセージを確認してください。");
         }
         if (error.response.status !== 500) {
           setSvMassage(error.request.responseText);
         }
-      })
+      });
   };
 
   return (
@@ -98,7 +90,6 @@ export const Register: React.FC = () => {
         className="form-control"
       />
       <p className="input">パスワード</p>
-
       <input
         type="text"
         value={password1}
@@ -112,10 +103,19 @@ export const Register: React.FC = () => {
         onChange={handlePassword2}
         className="form-control"
       />
-      <input  className="reset button-shadow" type="button" value="送信" onClick={postData} />
+      <input
+        className="reset button-shadow"
+        type="button"
+        value="送信"
+        onClick={postData}
+      />
       <div>
-        <p className="text">登録に成功したら下記のリンクからログインをしてくさい。</p>
-        <Link  className="reset button-shadow" to="/login">ログイン</Link>
+        <p className="text">
+          登録に成功したら下記のリンクからログインをしてくさい。
+        </p>
+        <Link className="reset button-shadow" to="/login">
+          ログイン
+        </Link>
       </div>
       &nbsp;
     </div>

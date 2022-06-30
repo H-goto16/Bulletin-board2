@@ -13,7 +13,8 @@ export const Home: React.FC = () => {
   const [datas, setDatas] = useState([]);
   const [user, setUser] = useState("匿名");
   const [time, setTime] = useState("");
-
+  const urlAPI = "http://localhost:8000/products/products/";
+  const urlUser = "http://localhost:8000/rest-auth/user/";
 
   function getCookieArray() {
     const arr: any = new Array();
@@ -28,22 +29,14 @@ export const Home: React.FC = () => {
   }
 
   const arr = getCookieArray();
-  console.log(arr["name"]);
-
-  const urlAPI = "http://localhost:8000/products/products/";
-  const urlUser = "http://localhost:8000/rest-auth/user/";
-
-  console.log(axios.defaults.baseURL);
 
   useEffect(() => {
     axios.get(urlAPI).then(res => {
-      console.log(res)
+      const result = res.data.reverse().join();
       setDatas(res.data);
     });
   }, []);
-  console.log(datas);
 
-  console.log(axios.defaults.baseURL);
   useEffect(() => {
     axios
       .get(urlUser, {
@@ -52,13 +45,10 @@ export const Home: React.FC = () => {
         },
       })
       .then(res => {
-        console.log(res);
         setUser(res.data.username);
       });
   }, []);
 
-  console.log(datas);
-  console.log(user);
 
   const handleChange = (e: {
     target: { value: React.SetStateAction<string> };
@@ -95,10 +85,8 @@ export const Home: React.FC = () => {
         time: datetime,
       })
       .then(res => {
-        console.log(res);
       })
       .catch(error => {
-        console.log(error);
       })
       .finally(function () {
         window.location.reload();
@@ -112,7 +100,7 @@ export const Home: React.FC = () => {
 
   return (
     <main className="container">
-      { time }
+      {time}
       <p className="title">簡易掲示板</p>
       <p className="text">
         こちらは簡易掲示板のサイトとなります。ログインを行うことで、投稿者名をつけて投稿することができます。ログインをしていない場合は匿名になります。
@@ -146,9 +134,11 @@ export const Home: React.FC = () => {
         onClick={postData}
       />
       <div>
-        {datas.map((data: Data) => (
+        {datas.reverse().map((data: Data) => (
           <div>
-            <div>{data.name}：{data.time}</div>
+            <div>
+              {data.name}：{data.time}
+            </div>
             <div className="dis">{data.text}</div>
           </div>
         ))}
