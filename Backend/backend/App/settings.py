@@ -16,7 +16,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'API',
     'corsheaders',
     'django.contrib.sites',
     'allauth',
@@ -24,6 +23,7 @@ INSTALLED_APPS = [
     'rest_auth',
     'rest_framework.authtoken',
     'rest_auth.registration',
+    'API',
 ]
 
 MIDDLEWARE = [
@@ -59,8 +59,12 @@ WSGI_APPLICATION = 'App.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'django-db',
+        'USER': 'django',
+        'PASSWORD': 'django',
+        'HOST': 'db',
+        'PORT': '3306'
     }
 }
 

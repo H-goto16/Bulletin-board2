@@ -100,7 +100,6 @@ export const Home: React.FC = () => {
 
   return (
     <main className="container">
-      {time}
       <p className="title">簡易掲示板</p>
       <p className="text">
         こちらは簡易掲示板のサイトとなります。ログインを行うことで、投稿者名をつけて投稿することができます。ログインをしていない場合は匿名になります。
