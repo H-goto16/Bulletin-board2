@@ -10,3 +10,5 @@ services:
     command: sh -c "cd django_front && yarn start"
     ports:
       - "3000:3000"
+    stdin_open: true
+    tty: true
