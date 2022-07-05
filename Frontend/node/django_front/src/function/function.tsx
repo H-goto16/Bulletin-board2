@@ -1,5 +1,3 @@
-import axios from "axios";
-
 export function getCookieArray() {
     const arr: any = new Array();
     if (document.cookie != "") {
@@ -27,3 +25,6 @@ export const logout = () => {
     window.location.reload();
 }
 
+export const urlAPI = "http://localhost:8000/products/products/";
+export const urlUser = "http://localhost:8000/rest-auth/user/";
+export const urlLogin = "http://localhost:8000/rest-auth/login/";
