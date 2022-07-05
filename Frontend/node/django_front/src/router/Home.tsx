@@ -14,7 +14,7 @@ interface FormInput {
 }
 export const Home: React.FC = () => {
   const { register, handleSubmit } = useForm<FormInput>();
-  const onSubmit: SubmitHandler<FormInput> = data => console.log(data);
+  const onSubmit: SubmitHandler<FormInput> = data => postData(data.text);
   const [datas, setDatas] = useState([]);
   const [user, setUser] = useState("匿名");
   const [time, setTime] = useState("");
@@ -52,13 +52,7 @@ axios.get(urlAPI).then(res => {
       });
   }, []);
 
-
-  // const handleChange = (e: {
-  //   target: { value: React.SetStateAction<string> };
-  // }) => {
-  //   setText(e.target.value);
-  // };
-  const postData = () => {
+  const postData = (textData:any) => {
     const date = new Date();
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
@@ -80,16 +74,12 @@ axios.get(urlAPI).then(res => {
       second +
       "秒";
     setTime(datetime);
-
+    console.log(textData);
     axios
       .post(urlAPI, {
         name: user,
-        // text: text,
+        text: textData,
         time: datetime,
-      })
-      .then(res => {
-      })
-      .catch(error => {
       })
       .finally(function () {
         window.location.reload();
