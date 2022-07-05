@@ -3,7 +3,6 @@ import { useCookies } from "react-cookie";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "../styles/login.css";
-import { hasSelectionSupport } from "@testing-library/user-event/dist/utils";
 
 export const Login: React.FC = () => {
   const [userName, setName] = useState("");
