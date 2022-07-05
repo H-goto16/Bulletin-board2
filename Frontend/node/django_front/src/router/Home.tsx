@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { getCookieArray, data, logout } from "../function/function";
 import axios from "axios";
 import "../styles/App.css";
 
@@ -17,31 +18,18 @@ export const Home: React.FC = () => {
   const onSubmit: SubmitHandler<FormInput> = data => postData(data.text);
   const [datas, setDatas] = useState([]);
   const [user, setUser] = useState("匿名");
-  const [time, setTime] = useState("");
   const urlAPI = "http://localhost:8000/products/products/";
   const urlUser = "http://localhost:8000/rest-auth/user/";
-
-  function getCookieArray() {
-    const arr: any = new Array();
-    if (document.cookie != "") {
-      const tmp = document.cookie.split("; ");
-      for (var i = 0; i < tmp.length; i++) {
-        var data = tmp[i].split("=");
-        arr[data[0]] = decodeURIComponent(data[1]);
-      }
-    }
-    return arr;
-  }
-
   const arr = getCookieArray();
 
-axios.get(urlAPI).then(res => {
-  res.data.reverse().join();
-  setDatas(res.data);
-});
+  axios.get(urlAPI).then(res => {
+    res.data.reverse().join();
+    setDatas(res.data);
+  });
 
   useEffect(() => {
-    axios
+    if (arr["name"] !== "") {
+      axios
       .get(urlUser, {
         headers: {
           Authorization: "Token " + arr["name"],
@@ -50,31 +38,11 @@ axios.get(urlAPI).then(res => {
       .then(res => {
         setUser(res.data.username);
       });
-  }, []);
+    }
+    },[]);
 
-  const postData = (textData:any) => {
-    const date = new Date();
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
-    const hour = date.getHours();
-    const minute = date.getMinutes();
-    const second = date.getSeconds();
-    const datetime =
-      year +
-      "年" +
-      month +
-      "月" +
-      day +
-      "日" +
-      hour +
-      "時" +
-      minute +
-      "分" +
-      second +
-      "秒";
-    setTime(datetime);
-    console.log(textData);
+  const postData = (textData: any) => {
+    const datetime:any = data()
     axios
       .post(urlAPI, {
         name: user,
@@ -84,11 +52,6 @@ axios.get(urlAPI).then(res => {
       .finally(function () {
         window.location.reload();
       });
-  };
-
-  const logout = () => {
-    document.cookie = "name=;expires=0;";
-    window.location.reload();
   };
 
   return (
