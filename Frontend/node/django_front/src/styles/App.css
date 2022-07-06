@@ -75,10 +75,15 @@ body {
 
 .error {
   color: red;
+  font-size: 15px;
+}
+
+.massage {
+  color: red;
+  font-size: 15px;
+  margin: 40px auto;
   display: flex;
   justify-content: center;
-  margin: 40px auto;
-  font-size: 15px;
 }
 
 .button-shadow {

@@ -56,10 +56,8 @@ export const Login: React.FC = () => {
       <p className="user">
         <p className="text">ユーザー名：{user}</p>
       </p>
-      <p className="error">{message}</p>
-      <p className="text">
-        ユーザー名、メールアドレスはどちらか片方でログインできます。
-      </p>
+      <p className="massage">{message}</p>
+      <p className="text"> ユーザー名、メールアドレスはどちらか片方でログインできます。 </p>
       <form onSubmit={handleSubmit(onSubmit)} className="login-form">
         <p className="input">ユーザー名</p>
         <input {...register("username")} placeholder="ユーザー名" className="form-control" />
