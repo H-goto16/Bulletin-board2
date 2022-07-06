@@ -38,8 +38,8 @@ export const Mypage: React.FC = () => {
         }
     }, []);
 
-    function test() {
-        const filterData: any = []; 
+    function diaplay() {
+        const filterData: any = [];
         const result = datas.filter((value: any) => {
             if (value.name.indexOf(user) !== -1) {
                 filterData.push(value)
@@ -69,7 +69,7 @@ export const Mypage: React.FC = () => {
                         <div className="dis">{data.text}</div>
                     </div>
                 ))}
-                <input className="reset button-shadow" type="button" value="表示" onClick={test} />
+                <input className="reset button-shadow" type="button" value="表示" onClick={diaplay} />
             </div>
             &nbsp;
         </main>
