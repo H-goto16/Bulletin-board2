@@ -56,8 +56,7 @@ export const Mypage: React.FC = () => {
         <main className="container">
             <p className="title">マイページ</p>
             <p className="text">投稿履歴が見れます。</p>
-            <Link className="reset button-shadow" to="/login">ログイン</Link>
-            <Link className="reset button-shadow" to="/Register">新規登録</Link>
+            <Link className="reset button-shadow" to="/">掲示板に戻る</Link>
             <input className="reset button-shadow" type="button" value="ログアウト" onClick={logout} />
             <div className="username">ユーザー：{user}</div>
             <div>

@@ -56,7 +56,7 @@ if (arr["name"] !== "") {
     <main className="container">
       <p className="title">簡易掲示板</p>
       <p className="text">こちらは簡易掲示板のサイトとなります。ログインを行うことで、投稿者名をつけて投稿することができます。ログインをしていない場合は匿名になります。</p>
-      <Link to="/Mypage">マイページ</Link>
+      <Link　className="reset button-shadow" to="/Mypage">マイページ</Link>
       <Link className="reset button-shadow" to="/login">ログイン</Link>
       <Link className="reset button-shadow" to="/Register">新規登録</Link>
       <input className="reset button-shadow"type="button" value="ログアウト" onClick={logout}/>
