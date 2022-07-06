@@ -1,38 +1,56 @@
+@charset "UTF-8";
 .container {
-  background-color: rgba(255, 212, 212, 0.805);
   margin-top: 3vh;
 }
 
 .text {
   text-align: center;
-  font-size: 1em;
+  font-size: 2vh;
   font-family: serif;
+  color: white;
+}
+
+.detail {
+  font-size: 2vh;
+  font-family: sans-serif;
+  color: white;
+  margin-left: 10px;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  margin-top: 90px;
+  border-radius: 50px;
 }
 
 .title {
+  margin-top: 70px;
   padding-top: 5vh;
   padding-bottom: 5vh;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
   justify-content: center;
-  font-size: 2em;
   font-family: serif;
+  color: rgb(240, 240, 240);
+  font-size: 3vh;
 }
 
 .dis {
   margin: 10px;
-  font-family: serif;
+  font-family: system-ui;
+  font-size: 2vh;
+  padding: 4px 10px;
+  font-weight: bold;
+}
+
+body {
+  background: linear-gradient(90deg, rgb(7, 7, 42) 20px, transparent 1%) center, linear-gradient(rgb(7, 7, 42) 20px, transparent 1%) center, rgb(161, 141, 218);
+  background-size: 22px 22px;
 }
 
 .link {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
   justify-content: center;
   margin: 10px;
 }
@@ -48,39 +66,63 @@
   text-align: end;
 }
 
+.input {
+  font-size: 2vh;
+  font-family: sans-serif;
+  color: white;
+  margin: 10px 0;
+}
 
 .error {
   color: red;
-  display: inline-flex;
-  justify-content: reverse;
+  display: flex;
+  justify-content: center;
+  margin: 40px auto;
   font-size: 15px;
 }
+
 .button-shadow {
+  text-align: center;
   box-sizing: border-box;
-  display: inline-flex;
-  justify-content: reverse;
-  max-width: 100px;
+  display: block;
+  max-width: 200px;
   width: 100%;
-  margin: 10px    ;
-  background: #c67c68;
+  margin: 10px auto;
+  background: #670e23;
+  /* 色変更可能 */
   color: #fff;
   font-weight: bold;
-  outline: none;
   padding: 13px 10px 10px;
   border-radius: 5px;
-  border-bottom: 5px solid rgba(0,0,0,0.3);
+  border-bottom: 5px solid rgba(0, 0, 0, 0.3);
 }
+
 .button-shadow:hover {
-  animation: 1s flash;
+  -webkit-animation: 1s flash;
+          animation: 1s flash;
 }
+
 .button-shadow:active, .button-shadow:focus {
   border-bottom-width: 0;
   margin-top: 5px;
-  background: #f5be83;
+  background: #1e0606;
+  /* 色変更可能 */
+}
+
+@-webkit-keyframes flash {
+  from {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes flash {
-  from { opacity: 0.5; }
-  to { opacity: 1; }
-}
-
+  from {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 1;
+  }
+}/*# sourceMappingURL=App.css.map */

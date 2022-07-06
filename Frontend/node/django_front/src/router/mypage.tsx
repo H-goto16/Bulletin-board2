@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { getCookieArray, logout, urlAPI, urlUser } from "../function/function";
+import { getCookieArray, urlAPI, urlUser } from "../function/function";
 import axios from "axios";
-import "../styles/App.css";
+import Navbar from "../components/navbar";
 
 type Data = {
     name: string;
@@ -54,15 +53,14 @@ export const Mypage: React.FC = () => {
 
     return (
         <main className="container">
+            <Navbar />
             <p className="title">マイページ</p>
             <p className="text">投稿履歴が見れます。</p>
-            <Link className="reset button-shadow" to="/">掲示板に戻る</Link>
-            <input className="reset button-shadow" type="button" value="ログアウト" onClick={logout} />
-            <div className="username">ユーザー：{user}</div>
+            <div className="detail">ユーザー：{user}</div>
             <div>
                 {data.map((data: Data) => (
                     <div>
-                        <div>
+                        <div className="detail">
                             {data.name}：{data.time}
                         </div>
                         <div className="dis">{data.text}</div>

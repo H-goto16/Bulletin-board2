@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Link } from "react-router-dom";
-import { getCookieArray, data, logout, urlAPI, urlUser } from "../function/function";
+import { getCookieArray, data, urlAPI, urlUser } from "../function/function";
+import Navbar from "../components/navbar";
 import axios from "axios";
 import "../styles/App.css";
+import logo from "../images/logo.png";
 
 type Data = {
   name: string;
   text: number;
-  time: string; 
+  time: string;
 };
 interface FormInput {
   text: string;
@@ -19,7 +20,7 @@ export const Home: React.FC = () => {
   const [datas, setDatas] = useState([]);
   const [user, setUser] = useState("匿名");
   const arr = getCookieArray();
-  
+
   useEffect(() => {
     axios.get(urlAPI).then(res => {
       res.data.reverse().join();
@@ -27,20 +28,20 @@ export const Home: React.FC = () => {
     });
   }, []);
 
-if (arr["name"] !== "") {
-  axios
-  .get(urlUser, {
-    headers: {
-      Authorization: "Token " + arr["name"],
-    },
-  })
-  .then(res => {
-    setUser(res.data.username);
-  });
-}
+  if (arr["name"] !== "") {
+    axios
+      .get(urlUser, {
+        headers: {
+          Authorization: "Token " + arr["name"],
+        },
+      })
+      .then(res => {
+        setUser(res.data.username);
+      });
+  }
 
   const postData = (textData: any) => {
-    const datetime:any = data()
+    const datetime: any = data()
     axios
       .post(urlAPI, {
         name: user,
@@ -54,28 +55,25 @@ if (arr["name"] !== "") {
 
   return (
     <main className="container">
-      <p className="title">簡易掲示板</p>
+      <Navbar />
+      <img src={logo} className="logo" alt="" />
       <p className="text">こちらは簡易掲示板のサイトとなります。ログインを行うことで、投稿者名をつけて投稿することができます。ログインをしていない場合は匿名になります。</p>
-      <Link　className="reset button-shadow" to="/Mypage">マイページ</Link>
-      <Link className="reset button-shadow" to="/login">ログイン</Link>
-      <Link className="reset button-shadow" to="/Register">新規登録</Link>
-      <input className="reset button-shadow"type="button" value="ログアウト" onClick={logout}/>
-      <div className="username">投稿者名：{user}</div>
-        <form onSubmit={handleSubmit(onSubmit)} className="input-form">
-          <input {...register("text")} className="form-control" />
-          <input className="reset button-shadow" type="submit" value="送信"/>
-        </form>
-      <div>
+      <div className="detail">投稿者名：{user}</div>
+      <form onSubmit={handleSubmit(onSubmit)} className="input-form">
+        <input {...register("text")} placeholder="投稿する内容を入力" className="form-control" />
+        <input className="reset button-shadow" type="submit" value="送信" />
+      </form>
+      <ul>
         {datas.reverse().map((data: Data) => (
           <div>
-            <div>
-              {data.name}：{data.time}
+            <div className="detail">
+                {data.name}：{data.time}
             </div>
-            <div className="dis">{data.text}</div>
+            <div className="dis" >{data.text}</div>
           </div>
         ))}
-      </div>
+      </ul >
       &nbsp;
-    </main>
+    </main >
   );
 };

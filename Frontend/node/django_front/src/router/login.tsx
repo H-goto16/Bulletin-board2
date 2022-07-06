@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";
-import "../styles/login.css";
 import { logout, getCookieArray, urlUser, urlLogin } from "../function/function";
+import Navbar from "../components/navbar";
 
 interface FormInput {
   username: string;
@@ -52,8 +51,8 @@ export const Login: React.FC = () => {
 
   return (
     <div className="container">
+      <Navbar />
       <h2 className="title">ログイン</h2>
-      <Link to="/" className="link"> 掲示板に戻る </Link>
       <p className="user">
         <p className="text">ユーザー名：{user}</p>
       </p>
@@ -63,11 +62,11 @@ export const Login: React.FC = () => {
       </p>
       <form onSubmit={handleSubmit(onSubmit)} className="login-form">
         <p className="input">ユーザー名</p>
-        <input {...register("username")} className="form-control" />
+        <input {...register("username")} placeholder="ユーザー名" className="form-control" />
         <p className="input">メールアドレス</p>
-        <input {...register("email")} className="form-control" />
+        <input {...register("email")} placeholder="example@example.com" className="form-control" />
         <p className="input">パスワード</p>
-        <input {...register("password")} className="form-control" />
+        <input {...register("password")} placeholder="password" className="form-control" />
         <div className="button-space">
           <input className="reset button-shadow" type="submit" value="ログイン" />
         </div>

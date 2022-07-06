@@ -1,0 +1,102 @@
+.header .navbar {
+  background-color: rgba(82, 15, 9, 0.9);
+}
+.header .navbar .navbar-brand {
+  color: rgb(205, 163, 95);
+  font-family: "Anton", sans-serif;
+}
+.header .navbar .navbar-toggler:focus {
+  box-shadow: none;
+}
+.header .navbar .navbar-toggler-icon {
+  display: none;
+}
+.header .navbar .menu-icon {
+  transition: 0.5s;
+}
+.header .navbar .menu-icon.menu-open {
+  -webkit-animation-name: jumping;
+          animation-name: jumping;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+}
+.header .navbar .menu-icon.menu-open:hover {
+  -webkit-animation-play-state: paused;
+          animation-play-state: paused;
+}
+.header .navbar .menu-icon .menu {
+  display: block;
+  width: 35px;
+  height: 2px;
+  background-color: blanchedalmond;
+  content: "";
+  transition: 0.7s;
+}
+.header .navbar .menu-icon .menu.first {
+  margin-bottom: 10px;
+}
+.header .navbar .menu-icon .menu.first.menu-open {
+  transform: rotate(405deg);
+  transform-origin: left;
+  margin: none;
+}
+.header .navbar .menu-icon .menu.second.menu-open {
+  transform: scaleX(3) rotate(360deg);
+  opacity: 0;
+}
+.header .navbar .menu-icon .menu.third {
+  margin-top: 10px;
+}
+.header .navbar .menu-icon .menu.third.menu-open {
+  transform: rotate(-405deg);
+  transform-origin: left;
+  margin: none;
+}
+.header .navbar .menu-icon:hover {
+  transform: scale(1.1);
+  transition: 0.2s;
+}
+.header .navbar .navbar-nav {
+  display: flex;
+  justify-content: end;
+}
+.header .navbar .navbar-nav .nav-item {
+  text-align: center;
+  margin: 1vh;
+}
+.header .navbar .navbar-nav .nav-item .nav-link {
+  color: rgb(205, 163, 95);
+  font-family: "Play", sans-serif;
+  background-color: transparent;
+}
+.header .navbar .navbar-nav .nav-item .button {
+  background-color: transparent;
+  border: 2px solid transparent;
+  color: rgb(205, 163, 95);
+  text-align: center;
+  margin-top: 4px;
+}
+
+@-webkit-keyframes jumping {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  75% {
+    transform: translateY(-3px) scale(1.2);
+  }
+}
+
+@keyframes jumping {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  75% {
+    transform: translateY(-3px) scale(1.2);
+  }
+}
+.hover-text:hover {
+  transform: scale(1.2);
+  transition: 0.5s;
+}/*# sourceMappingURL=navbar.css.map */
