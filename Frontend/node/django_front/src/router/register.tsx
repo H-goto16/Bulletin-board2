@@ -1,121 +1,60 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";
-import "../styles/register.css";
+import "../styles/login.css";
+import { urlRegister } from "../function/function";
 
+interface FormInput {
+  username: string;
+  email: string;
+  password: string;
+  password2: string;
+}
 export const Register: React.FC = () => {
-  const [userName, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password1, setPassword1] = useState("");
-  const [password2, setPassword2] = useState("");
-  const [status, setStatus]: any = useState("");
+  const { register, handleSubmit } = useForm<FormInput>();
+  const onSubmit: SubmitHandler<FormInput> = data => postData(data.username, data.email, data.password, data.password2);
   const [message, setMassage]: any = useState("");
-  const [svMassage, setSvMassage]: any = useState("");
-  const [datas, setDatas] = useState([]);
-
-  const urlAPI = "http://localhost:8000/products/products/";
-  const urlRegister = "http://localhost:8000/rest-auth/registration/";
   
-  useEffect(() => {
-    axios.get(urlAPI).then(res => {
-      setDatas(res.data);
-    });
-  }, []);
-
-  const handleChange = (e: {
-    target: { value: React.SetStateAction<string> };
-  }) => {
-    setName(e.target.value);
-  };
-
-  const handleEmail = (e: {
-    target: { value: React.SetStateAction<string> };
-  }) => {
-    setEmail(e.target.value);
-  };
-
-  const handlePassword1 = (e: {
-    target: { value: React.SetStateAction<string> };
-  }) => {
-    setPassword1(e.target.value);
-  };
-
-  const handlePassword2 = (e: {
-    target: { value: React.SetStateAction<string> };
-  }) => {
-    setPassword2(e.target.value);
-  };
-
-  const postData = () => {
+  const postData = (username: string, email: string, password1: string, password2: string) => {
+    console.log(username,email,password1,password2)
     axios
       .post(urlRegister, {
-        username: userName,
+        username: username,
         email: email,
         password1: password1,
-        password2: password2,
+        password2: password2
       })
       .then(res => {
-        setStatus(res.status);
+        setMassage("登録に成功しました。");
+      }).catch(err => {
+        if (axios.isAxiosError(err)) {
+          setMassage("登録に失敗しました。入力情報を確認してください。");
+          console.log(err)
+        }
       })
-      .catch(error => {
-        setStatus(error.response.status);
-        if (error.response.status === 500) {
-          setMassage("登録に成功しました。");
-        } else {
-          setMassage("登録に失敗しました。エラーメッセージを確認してください。");
-        }
-        if (error.response.status !== 500) {
-          setSvMassage(error.request.responseText);
-        }
-      });
   };
 
   return (
     <div className="container">
       <h2 className="title">ユーザー新規登録</h2>
-      <p className="text">{message}</p>
-      <p className="text">{svMassage}</p>
-      <p className="input">ユーザー名</p>
-      <input
-        type="text"
-        value={userName}
-        onChange={handleChange}
-        className="form-control"
-      />
-      <p className="input">メールアドレス</p>
-      <input
-        type="text"
-        value={email}
-        onChange={handleEmail}
-        className="form-control"
-      />
-      <p className="input">パスワード</p>
-      <input
-        type="text"
-        value={password1}
-        onChange={handlePassword1}
-        className="form-control"
-      />
-      <p className="input">パスワード再入力</p>
-      <input
-        type="text"
-        value={password2}
-        onChange={handlePassword2}
-        className="form-control"
-      />
-      <input
-        className="reset button-shadow"
-        type="button"
-        value="送信"
-        onClick={postData}
-      />
-      <div>
-        <p className="text">
-          登録に成功したら下記のリンクからログインをしてくさい。
-        </p>
-        <Link className="reset button-shadow" to="/login">
-          ログイン
-        </Link>
+      <Link to="/" className="link"> 掲示板に戻る </Link>
+      <p className="error">{message}</p>
+      <form onSubmit={handleSubmit(onSubmit)} className="login-form">
+        <p className="input">ユーザー名</p>
+        <input {...register("username")} className="form-control"/>
+        <p className="input">メールアドレス</p>
+        <input {...register("email")} className="form-control"/>
+        <p className="input">パスワード</p>
+        <input {...register("password")} className="form-control"/>
+        <p className="input">パスワード再入力</p>
+        <input {...register("password2")} className="form-control"/>
+        <div className="button-space">
+          <input className="reset button-shadow" type="submit" value="新規登録" />
+        </div>
+      </form>
+      <div className="button-space">
+        <Link className="reset button-shadow" to="/login">ログイン</Link>
       </div>
       &nbsp;
     </div>

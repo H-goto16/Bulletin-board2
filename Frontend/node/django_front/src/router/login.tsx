@@ -1,10 +1,9 @@
-import React, { useState,useEffect } from "react";
-import { useCookies } from "react-cookie";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";
 import "../styles/login.css";
-import { logout, getCookieArray, urlAPI, urlUser, urlLogin } from "../function/function";
+import { logout, getCookieArray, urlUser, urlLogin } from "../function/function";
 
 interface FormInput {
   username: string;
@@ -20,20 +19,20 @@ export const Login: React.FC = () => {
   const arr = getCookieArray();
 
   useEffect(() => {
-  if (arr["name"] !== "") {
-    axios
-    .get(urlUser, {
-      headers: {
-        Authorization: "Token " + arr["name"],
-      },
-    })
-    .then(res => {
-      setUser(res.data.username);
-    });
-  }
+    if (arr["name"] !== "") {
+      axios
+        .get(urlUser, {
+          headers: {
+            Authorization: "Token " + arr["name"],
+          },
+        })
+        .then(res => {
+          setUser(res.data.username);
+        });
+    }
   }, []);
-  
-  const postData = (username:string,email:string,password:string) => {
+
+  const postData = (username: string, email: string, password: string) => {
     axios
       .post(urlLogin, {
         username: username,
@@ -64,13 +63,13 @@ export const Login: React.FC = () => {
       </p>
       <form onSubmit={handleSubmit(onSubmit)} className="login-form">
         <p className="input">ユーザー名</p>
-        <input {...register("username")} className="form-control"/>
+        <input {...register("username")} className="form-control" />
         <p className="input">メールアドレス</p>
-        <input {...register("email")} className="form-control"/>
+        <input {...register("email")} className="form-control" />
         <p className="input">パスワード</p>
-        <input {...register("password")} className="form-control"/>
+        <input {...register("password")} className="form-control" />
         <div className="button-space">
-        <input className="reset button-shadow" type="submit" value="ログイン" />
+          <input className="reset button-shadow" type="submit" value="ログイン" />
         </div>
       </form>
       <div className="button-space">

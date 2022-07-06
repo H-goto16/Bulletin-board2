@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { getCookieArray, data, logout } from "../function/function";
+import { getCookieArray, data, logout, urlAPI, urlUser } from "../function/function";
 import axios from "axios";
 import "../styles/App.css";
 
@@ -18,28 +18,26 @@ export const Home: React.FC = () => {
   const onSubmit: SubmitHandler<FormInput> = data => postData(data.text);
   const [datas, setDatas] = useState([]);
   const [user, setUser] = useState("匿名");
-  const urlAPI = "http://localhost:8000/products/products/";
-  const urlUser = "http://localhost:8000/rest-auth/user/";
   const arr = getCookieArray();
-
-  axios.get(urlAPI).then(res => {
-    res.data.reverse().join();
-    setDatas(res.data);
-  });
-
+  
   useEffect(() => {
-    if (arr["name"] !== "") {
-      axios
-      .get(urlUser, {
-        headers: {
-          Authorization: "Token " + arr["name"],
-        },
-      })
-      .then(res => {
-        setUser(res.data.username);
-      });
-    }
-    },[]);
+    axios.get(urlAPI).then(res => {
+      res.data.reverse().join();
+      setDatas(res.data);
+    });
+  }, []);
+
+if (arr["name"] !== "") {
+  axios
+  .get(urlUser, {
+    headers: {
+      Authorization: "Token " + arr["name"],
+    },
+  })
+  .then(res => {
+    setUser(res.data.username);
+  });
+}
 
   const postData = (textData: any) => {
     const datetime:any = data()
@@ -58,6 +56,7 @@ export const Home: React.FC = () => {
     <main className="container">
       <p className="title">簡易掲示板</p>
       <p className="text">こちらは簡易掲示板のサイトとなります。ログインを行うことで、投稿者名をつけて投稿することができます。ログインをしていない場合は匿名になります。</p>
+      <Link to="/Mypage">マイページ</Link>
       <Link className="reset button-shadow" to="/login">ログイン</Link>
       <Link className="reset button-shadow" to="/Register">新規登録</Link>
       <input className="reset button-shadow"type="button" value="ログアウト" onClick={logout}/>
