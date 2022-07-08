@@ -64,7 +64,7 @@ export const Login: React.FC = () => {
         <p className="input">メールアドレス</p>
         <input {...register("email")} placeholder="example@example.com" className="form-control" />
         <p className="input">パスワード</p>
-        <input {...register("password")} placeholder="password" className="form-control" />
+        <input {...register("password")} type="password" placeholder="password" className="form-control" />
         <div className="button-space">
           <input className="reset button-shadow" type="submit" value="ログイン" />
         </div>

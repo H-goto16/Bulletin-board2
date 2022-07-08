@@ -54,9 +54,9 @@ export const Register: React.FC = () => {
         <p className="input">メールアドレス<p className="error">{emailError}</p></p>
         <input {...register("email")} placeholder="example@example.com" className="form-control" />
         <p className="input">パスワード<p className="error">{password1Error}</p></p>
-        <input {...register("password")} placeholder="英数８文字以上" className="form-control" />
+        <input {...register("password")} type="password" placeholder="英数８文字以上" className="form-control" />
         <p className="input">パスワード再入力<p className="error">{password2Errpr}</p></p>
-        <input {...register("password2")} placeholder="英数８文字以上" className="form-control" />
+        <input {...register("password2")} type="password" placeholder="英数８文字以上" className="form-control" />
         <div className="button-space">
           <input className="reset button-shadow" type="submit" value="新規登録" />
         </div>
