@@ -24,6 +24,7 @@ export const Home: React.FC = () => {
   useEffect(() => {
     axios.get(urlAPI).then(res => {
       res.data.reverse().join();
+      console.log(res);
       setDatas(res.data);
     });
   }, []);

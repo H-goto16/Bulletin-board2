@@ -95,9 +95,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3000',
-]
+CORS_ORIGIN_WHITELIST = ['http://localhost:3000',]
+
 SITE_ID = 1
 
 REST_FRAMEWORK = {
@@ -106,3 +105,5 @@ REST_FRAMEWORK = {
             'rest_framework.authentication.BasicAuthentication',
         ),
     }
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

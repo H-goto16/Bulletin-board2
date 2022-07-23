@@ -29,3 +29,5 @@ export const urlAPI = "http://localhost:8000/products/products/";
 export const urlUser = "http://localhost:8000/rest-auth/user/";
 export const urlLogin = "http://localhost:8000/rest-auth/login/";
 export const urlRegister = "http://localhost:8000/rest-auth/registration/";
+export const urlReset = "http://localhost:8000/rest-auth/password/reset/";
+export const urlChange = "http://localhost:8000/rest-auth/password/change/"

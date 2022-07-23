@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getCookieArray, urlAPI, urlUser } from "../function/function";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import Navbar from "../components/navbar";
 
 type Data = {
@@ -56,6 +57,7 @@ export const Mypage: React.FC = () => {
             <Navbar />
             <p className="title">マイページ</p>
             <p className="text">投稿履歴が見れます。</p>
+            <Link className="reset button-shadow" to={"/reset"}>パスワード変更</Link>
             <div className="detail">ユーザー：{user}</div>
             <div>
                 {data.map((data: Data) => (

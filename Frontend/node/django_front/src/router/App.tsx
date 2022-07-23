@@ -3,6 +3,7 @@ import { Home } from "./Home";
 import { Login } from "./login";
 import { Register } from "./register";
 import { Mypage } from "./mypage";
+import { Change } from "./change";
 import "../styles/App.css";
 
 export const App: React.FC = () => {
@@ -11,8 +12,9 @@ export const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login"element={<Login/>}/>
-        <Route path="/Register" element={<Register />} />    
-        <Route path="/mypage" element={<Mypage />} />    
+        <Route path="/Register" element={<Register />} />
+        <Route path="/mypage" element={<Mypage />} />
+        <Route path="/reset" element={<Change />} />
       </Routes>
     </BrowserRouter>
   );
